@@ -1,0 +1,54 @@
+#LT_CANV {
+    display: inline;
+    border: 5px, solid, black;
+    max-height: 70vh;
+    max-width: 100vw;
+}
+
+#main-header {
+
+    font-family: 'Times New Roman', Courier, monospace;
+    color: rgb(4, 158, 86);
+}
+
+.button {
+    background-color: #3eddc5;
+    border: 1px solid black;
+    box-shadow: 0 9px#505050;
+    padding: 30px;
+    text-align: center;
+    font-size: 28px;
+    }
+    
+    .button:hover {
+    background-color: #3d1ab0;
+    }
+    
+    .button:active {
+    box-shadow: 0 5px #3D3D3D;
+    transform: translateY(5px);
+    }
+    
+    .pressed{
+    box-shadow: 0 5px #3D3D3D;
+    transform: translateY(5px);    
+    }
+    
+    .red {
+    color: #110b0b6d;
+    }
+    
+    .green {
+    color: #4a4f4a28;
+    }
+
+    .blue {
+    color: #110b0b6d;
+    }
+        
+    .yellow {
+    color: #4a4f4a28;
+    }
+    .round {
+    border-radius: 50%;
+    }

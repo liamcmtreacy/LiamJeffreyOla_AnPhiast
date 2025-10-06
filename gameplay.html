@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Liam Treacy" content="An Phiast's Decisions">
-    <title>UI Programming 24-25</title>
+    <title>An Phiast's Decisions</title>
     <link href="assets/css/screen.css" rel="stylesheet" text="text/css">
 </head>
 <body>
@@ -16,6 +16,31 @@
             Oops! looks like your browser does not support canvas tag
         </canvas>
     </section>
+
+        <label for = "volumeControl"> Adjust The Volume </label>
+    <input type = "range" id = "volumeSlider" min = "0" max = "100" value = "100">
+    <span id = "volumeValue">100</span>
+
+    <table>
+        <tbody>
+          <tr>
+            <td>&nbsp;</td>
+            <td><button onmousedown="clickDpadYellow()" onmouseup="clickableDpadReleased()" class="button yellow round">Y</button></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><button onmousedown="clickDpadBlue()" onmouseup="clickableDpadReleased()" class="button blue round">X</button></td>
+            <td>&nbsp;</td>
+            <td><button onmousedown="clickDpadRed()" onmouseup="clickableDpadReleased()" class="button red round">B</button></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><button onmousedown="clickDpadGreen()" onmouseup="clickableDpadReleased()" class="button green round">A</button></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
 
     <table id = "TABLE01">
         <tr> 
