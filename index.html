@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>        
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Colm ONeill">
+  <title>UI Programming 23 24</title>
+  <link href="assets/css/screen.css" rel="stylesheet" text="text/css">
+</head>
+<body>
+    <h1 id="main-header">Hello, welcome to An Phiast's Decisions.</h1>
+    <h2 id= "SecondHead"> Let's grab a name off you, shall we? </h2>
+
+    <form name="helloForm" onsubmit=" return validateForm()">
+        My Name: <input type="text" name="name">
+        <input type="submit" value="Submit">
+    </form>
+
+    
+    <div id="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Looks like you may have been here before  <br>Existing local data:</p>
+        <code class="present-saved-data"></code>
+        <p>Would you like to retrieve your previous progress</p>
+        <button class="saved-data-accept">Yes, I want to continue </button><button class="saved-data-refusal">No, it's start to time fresh</button>
+      </div>
+    </div> 
+
+    <script type="text/javascript" src="assets/js/initial.js"></script> 
+
+</body>
+</html>
