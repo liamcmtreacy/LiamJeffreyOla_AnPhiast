@@ -31,3 +31,18 @@ if(typeof(Storage) !== "undefined") {
     console.log("Local storage is not supported.");
     // The condition isn't met, meaning local storage isn't supported
   }
+
+  
+function validateForm(){
+    var x = document.forms["helloForm"]["name"].value;
+    if (x == "") {
+        alert("I need to know your name so I can say Hello");
+        return false;
+    }
+    else{
+        alert("Hello there " + document.forms["helloForm"]["name"].value);
+        localStorage.setItem("username", x);
+        window.location.href = "gameplay.html"; 
+        return false;
+    }
+}

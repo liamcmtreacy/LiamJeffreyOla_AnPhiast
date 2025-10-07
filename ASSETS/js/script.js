@@ -7,6 +7,11 @@ const height = 18;
 const scaledWidth = scale * width;
 const scaledHeight = scale * height;
 
+let playerX = 200;
+let playerY = 200;
+let speed = 2;
+let currentDirection = 0;
+
 let selectedChoice = 0; // This number says which option is currently highlighted (starts at 0 = "Good") // this will change though depending on your choice,
 // These are the 3 choices you can pick
 let choice1 = "Good";
@@ -22,23 +27,32 @@ if (score){
     scoreCount = score;
 } 
 
+//AUDIO Declaring
+
+let newSound1 = new Audio("assets/audio/jungleJive.mp3");
+
+    // audioplayer
+    setInterval(playSound, 1200); //gap between audio playing
+    
+    function playSound(){ // function
+    console.log ("MUSIC LOOP"); // message to the console
+
+    newSound1.play(); // BACKGROUND MUSIC
+    newSound1.loop = true;
+    }
+
 // volumeADJUSTMENT
 
 const volumeSlider = document.getElementById("volumeSlider");
 const volumeValue = document.getElementById("volumeValue");
 newSound1.volume = volumeSlider.value/100;
-newSound03.volume = volumeSlider.value/100;
-newSound04.volume = volumeSlider.value/100;
-newSoudn05.volume = volumeSlider.value/100;
+
 // VOLUME ADJUSTER, I GOT HELP FROM MY FRIEND JEFFREY, FROM WHAT I UNDERSTAND IT TAKES AN INPUT AND CAN BE REDUCED AS THE SLIDER
 //GOES DOWN
 volumeSlider.addEventListener("input", () => {
 const volume = volumeSlider.value / 100;
 
 newSound1.volume = volume;
-newSound03.volume = volume;
-newSound04.volume = volume;
-newSoudn05.volume = volume;
 volumeValue.textContent = volumeSlider.value;
 });
 
@@ -86,29 +100,47 @@ function input(event) {
 
 function update () // important function.
 {
+    // laughably simple movement attempt
+    if (gamerInput.action === "Left")  
+        {
+            playerX -= speed;
+            console.log("Player Moveed Left");
+        }
+    if (gamerInput.action === "Right") 
+        {
+            playerX += speed;
+            console.log("Player Moveed Right");
+        }
+    if (gamerInput.action === "Up")    
+        {
+            playerY -= speed;
+            console.log("Player Went Up");
+        }
+    if (gamerInput.action === "Down")  
+    {
+        playerY += speed;
+        console.log("Player Went Down");
+    }
 
+     if (gamerInput.action !== "None") { // TESTING PURPOSES, WHILE THE PLAYER NOVES, POINTS GO UP 
+        scoreCount += 1;
+    }
+    evilEnding();
 }
 
-function writeScore(){ // WRITING THE SCORE TO THE SCREEN
-    let scoreString = "score: " + scoreCount;
-    context.font = '22px sans-serif';
-    context.fillText(scoreString, 1000, 20)
-    console.log("score is being counted")
-}
 
-function draw() { // DRAWING IMAGES
+// DRAWING IMAGES
+  function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height); // Clear first
 
-        // Green square
+    // Draw green square
     context.fillStyle = "green";
-    context.fillRect(200, 200, 100, 100); //currently An Phiast stand in.
+    context.fillRect(playerX, playerY, 100, 100);
 
-
-    context.clearRect(0,0, canvas.width, canvas.height);
     writeScore();
-
     
     // trying to do a path choice thing,
-
+/*
   if (selectedChoice === choice1) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
   ctx.fillText(choice1, 150, 140);
 
@@ -116,7 +148,7 @@ function draw() { // DRAWING IMAGES
   ctx.fillText(choice2, 150, 170);
 
   if (selectedChoice === choice3) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
-  ctx.fillText(choice3, 150, 200);
+  ctx.fillText(choice3, 150, 200); // won't work until more code written, may not even work all together. */
 }
 
 function writeScore(){ // WRITING THE SCORE TO THE SCREEN
@@ -177,6 +209,46 @@ function writeScore(){ // WRITING THE SCORE TO THE SCREEN
 
          // RANKING SYSTEM, HELP FROM MY OLD C++ GAME, JUST TRIED "JAVASCRIPTIFY" MY CODE
     }//function end
+
+    function clickableDpadReleased() {
+    console.log("dpad released"); // REPORT TO THE CONSOLE
+}
+function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
+    console.log("dpad yellow pressed");
+    console.log("Move Up");
+    playerY -= speed
+    console.log("MOVE UP, ENEMY INVERSED");
+    currentDirection = 1; // DIRECTION
+}
+function clickDpadBlue(){
+    console.log("dpad blue pressed");
+    console.log("Move Left");
+    playerX -= speed
+    console.log("MOVE LEFT");
+    currentDirection = 2;//DIRECTOION
+}
+function clickDpadRed(){
+    console.log("dpad red pressed");
+    console.log("Move Right");
+    playerX += speed
+    console.log("MOVE RIGHT");
+    currentDirection = 3;//DIRECTION
+}
+function clickDpadGreen(){
+    console.log("dpad green pressed");
+    console.log("Move Down");
+    playerY += speed
+    currentDirection = 0; // DIRECTION
+    }
+
+    function evilEnding(){ // BAD ENDINH
+
+    if(scoreCount > 400) // CONDITIONS HAVE TO BE MET
+    {
+        window.location.href = "Evilending.html" // TAKES US TO THE BAD ENDING
+        console.log("TEST FINISHED, EVIL ENDING LOAD");
+    }
+}
 
 
 function gameloop() {
