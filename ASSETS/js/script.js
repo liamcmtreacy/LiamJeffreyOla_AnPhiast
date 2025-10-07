@@ -76,7 +76,7 @@ function input(event) {
                 speed = 4;
                 break;
             default:
-                gamerInput = new GamerInput("None"); //No Input
+             gamerInput = new GamerInput("None"); //No Input
         }
     } else {
         gamerInput = new GamerInput("None");
