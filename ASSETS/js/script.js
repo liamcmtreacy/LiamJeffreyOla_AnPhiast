@@ -7,6 +7,12 @@ const height = 18;
 const scaledWidth = scale * width;
 const scaledHeight = scale * height;
 
+let selectedChoice = 0; // This number says which option is currently highlighted (starts at 0 = "Good") // this will change though depending on your choice,
+// These are the 3 choices you can pick
+let choice1 = "Good";
+let choice2 = "Neutral";
+let choice3 = "Evil";
+
 // LET DECLARATION METHOD
 let username = localStorage.getItem('username'); // OUR USERNAME
 let score = localStorage.getItem('score'); // THE SCORE
@@ -36,6 +42,48 @@ newSoudn05.volume = volume;
 volumeValue.textContent = volumeSlider.value;
 });
 
+// The GamerInput is an Object that holds the Current
+// GamerInput (Left, Right, Up, Down, MouseClicks)
+function GamerInput(input) {
+    this.action = input; // Hold the current input as a string
+}
+
+// Default GamerInput is set to None
+let gamerInput = new GamerInput("None"); //No Input
+
+function input(event) {
+    // Take Input from the Player
+    // console.log("Input");
+    // console.log("Event type: " + event.type);
+    //console.log("Keycode: " + event.keyCode);
+
+    if (event.type === "keydown") {
+        switch (event.keyCode) {
+            case 37: // Left Arrow
+                gamerInput = new GamerInput("Left");
+                break; //Left key
+            case 38: // Up Arrow
+                gamerInput = new GamerInput("Up");
+                break; //Up key
+            case 39: // Right Arrow
+                gamerInput = new GamerInput("Right");
+                break; //Right key
+            case 40: // Down Arrow
+                gamerInput = new GamerInput("Down");
+                break; //Down key
+                
+            case 83:
+                speed = 4;
+                break;
+            default:
+                gamerInput = new GamerInput("None"); //No Input
+        }
+    } else {
+        gamerInput = new GamerInput("None");
+        speed = 2;
+    }
+}
+
 function update () // important function.
 {
 
@@ -49,8 +97,26 @@ function writeScore(){ // WRITING THE SCORE TO THE SCREEN
 }
 
 function draw() { // DRAWING IMAGES
+
+        // Green square
+    context.fillStyle = "green";
+    context.fillRect(200, 200, 100, 100); //currently An Phiast stand in.
+
+
     context.clearRect(0,0, canvas.width, canvas.height);
     writeScore();
+
+    
+    // trying to do a path choice thing,
+
+  if (selectedChoice === choice1) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
+  ctx.fillText(choice1, 150, 140);
+
+  if (selectedChoice === choice2) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
+  ctx.fillText(choice2, 150, 170);
+
+  if (selectedChoice === choice3) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
+  ctx.fillText(choice3, 150, 200);
 }
 
 function writeScore(){ // WRITING THE SCORE TO THE SCREEN
