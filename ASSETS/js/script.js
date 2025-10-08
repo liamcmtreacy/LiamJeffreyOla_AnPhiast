@@ -4,11 +4,34 @@ const context = canvas.getContext("2d");
 const scale = 2;
 const width = 16;
 const height = 18;
-const scaledWidth = scale * width;
-const scaledHeight = scale * height;
+//choice boxes, gonna change to text boxes, but for our demo it will be very simple.
+const choice1height = 100;
+const choice1width = 100;
+
+const choice2height = 100;
+const choice2width = 100;
+
+const choice3height = 100;
+const choice3width = 100;
+
+const choice1Xpos = 60;
+const choice1Ypos = 140;
+
+const choice2Xpos = 400;
+const choice2Ypos = 400;
+
+const choice3Xpos = 550;
+const choice3Ypos = 80;
+
+let choiWidth = 100;
+let choiHieght = 100;
 
 let playerX = 200;
 let playerY = 200;
+
+
+//choice boxes, gonna change to text boxes, but for our demo it will be very simple.
+
 let speed = 2;
 let currentDirection = 0;
 
@@ -125,9 +148,13 @@ function update () // important function.
      if (gamerInput.action !== "None") { // TESTING PURPOSES, WHILE THE PLAYER NOVES, POINTS GO UP 
         scoreCount += 1;
     }
-    evilEnding();
-}
 
+        if (gamerInput.action === "A"){ // MUTE THE GAME
+        newSound1.pause();
+        console.log("MUTE MODE");
+        }
+    choiceManager();
+}
 
 // DRAWING IMAGES
   function draw() {
@@ -136,6 +163,17 @@ function update () // important function.
     // Draw green square
     context.fillStyle = "green";
     context.fillRect(playerX, playerY, 100, 100);
+
+    // choice boxes
+    context.fillStyle = "red";
+    context.fillRect(60, 140, choice1width, choice1height);
+
+    context.fillStyle = "yellow";
+    context.fillRect(400, 400, choice1width, choice1height);
+
+    context.fillStyle = "blue";
+    context.fillRect(550, 80, choice1width, choice1height);
+
 
     writeScore();
     
@@ -210,6 +248,35 @@ function writeScore(){ // WRITING THE SCORE TO THE SCREEN
          // RANKING SYSTEM, HELP FROM MY OLD C++ GAME, JUST TRIED "JAVASCRIPTIFY" MY CODE
     }//function end
 
+    function choiceManager() { // used logic from old codeberg projects, also some assistance from StackOverflow as I had to make changes.
+              if (choice1Xpos < playerX + 100 && //collision from left to right
+            choice1Xpos + choiWidth > playerX && // collision from right to left
+            choice1Ypos < playerY + 100  && // collision from top to bottom
+            choice1Ypos + choiHieght > playerY// collision from bottom to top
+            ){
+            window.location.href = "Evilending.html" // TAKES US TO THE BAD ENDING
+            console.log("TEST FINISHED, EVIL ENDING LOAD");
+        }
+
+              if (choice2Xpos < playerX + 100  && //collision from left to right
+            choice2Xpos + choiWidth > playerX && // collision from right to left
+            choice2Ypos < playerY + 100  && // collision from top to bottom
+            choice2Ypos + choiHieght > playerY // collision from bottom to top
+            ){
+            window.location.href = "goodEnding.html" // TAKES US TO THE BAD ENDING
+            console.log("TEST FINISHED, NICE ENDING LOAD");
+        }
+
+          if (choice3Xpos < playerX + 100  && //collision from left to right
+            choice3Xpos + choiWidth > playerX && // collision from right to left
+            choice3Ypos < playerY + 100 && // collision from top to bottom
+            choice3Ypos + choiHieght > playerY // collision from bottom to top
+            ){
+            window.location.href = "normalEnding.html" // TAKES US TO THE BAD ENDING
+            console.log("TEST FINISHED, NEUTRAL ENDING LOAD");
+        }
+    }     
+
     function clickableDpadReleased() {
     console.log("dpad released"); // REPORT TO THE CONSOLE
 }
@@ -240,15 +307,6 @@ function clickDpadGreen(){
     playerY += speed
     currentDirection = 0; // DIRECTION
     }
-
-    function evilEnding(){ // BAD ENDINH
-
-    if(scoreCount > 400) // CONDITIONS HAVE TO BE MET
-    {
-        window.location.href = "Evilending.html" // TAKES US TO THE BAD ENDING
-        console.log("TEST FINISHED, EVIL ENDING LOAD");
-    }
-}
 
 
 function gameloop() {
