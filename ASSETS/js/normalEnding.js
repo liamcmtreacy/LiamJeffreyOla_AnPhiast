@@ -1,10 +1,10 @@
 
-let newSound01 = new Audio("ASSETS/audio/doom.mp3");
+let newSoundNeutral = new Audio("ASSETS/audio/chillSmooth.mp3");
 
 function playEnding(){//PLAY THAT MUSIC!
 
 console.log("ENDING");
-newSound01.play();
+newSoundNeutral.play();
 }
 setInterval(playEnding, 1400);
 

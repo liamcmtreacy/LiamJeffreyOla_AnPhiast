@@ -1,5 +1,5 @@
 
-let newSound02 = new Audio("ASSETS/audio/ending.mp3");
+let newSound02 = new Audio("ASSETS/audio/horrorHell.mp3");
 
 function playEnding(){//PLAY THAT MUSIC!
 

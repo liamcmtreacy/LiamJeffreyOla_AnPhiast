@@ -52,7 +52,7 @@ if (score){
 
 //AUDIO Declaring
 
-let newSound1 = new Audio("assets/audio/jungleJive.mp3");
+let newSound1 = new Audio("assets/audio/cinematic.mp3");
 
     // audioplayer
     setInterval(playSound, 1200); //gap between audio playing
@@ -148,11 +148,6 @@ function update () // important function.
      if (gamerInput.action !== "None") { // TESTING PURPOSES, WHILE THE PLAYER NOVES, POINTS GO UP 
         scoreCount += 1;
     }
-
-        if (gamerInput.action === "A"){ // MUTE THE GAME
-        newSound1.pause();
-        console.log("MUTE MODE");
-        }
     choiceManager();
 }
 
@@ -173,9 +168,6 @@ function update () // important function.
 
     context.fillStyle = "blue";
     context.fillRect(550, 80, choice1width, choice1height);
-
-
-    writeScore();
     
     // trying to do a path choice thing,
 /*
@@ -189,72 +181,13 @@ function update () // important function.
   ctx.fillText(choice3, 150, 200); // won't work until more code written, may not even work all together. */
 }
 
-function writeScore(){ // WRITING THE SCORE TO THE SCREEN
-
-    let rankScoreE = "E"; //E
-    let rankScoreD = "D"; //D
-    let rankScoreC = "C"; //C
-    let rankScoreB = "B"; //B
-    let rankScoreA = "A"; //A
-    let rankScoreS = "S"; //S
-    
-    let scoreString = ("SCORE: " + scoreCount); // SCORE STRING GRABBING THE NUMBER AND SHOWING IT ON SCREEN
-    context.font = '21px sans-serif'; // FONT
-    context.fillText(scoreString, 930, 50); //DRAWING STRING
-    console.log("score is being counted");
-
-    if (scoreCount <= 10) { // RANKING SYSTEM IF STATEMENTS, ALL WORK BY CHECKING IF A NUMBER MATCHES CERTAIN VALUES, AND WHATEVER ONES IT DOES MATCH DRAW THE CORROSPONDING RANK
-            let rankString = ("Rank: " + rankScoreE);
-            context.font = '21px sans-serif';
-            context.fillText(rankString, 930, 25);
-            console.log("RANKING BEING DONE");
-        }
-        
-    else if (scoreCount >= 1 && scoreCount <= 100) {
-                    let rankString = ("Rank: " + rankScoreD);
-                    context.font = '21px sans-serif';
-                    context.fillText(rankString, 930, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount >= 101 && scoreCount <= 199){
-                    let rankString = ("Rank: " + rankScoreC);
-                    context.font = '21px sans-serif';
-                    context.fillText(rankString, 930, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount>= 200 && scoreCount <= 299){
-                    let rankString = ("Rank: " + rankScoreB);
-                    context.font = '21px sans-serif';
-                    context.fillText(rankString, 930, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount>= 300  && scoreCount<= 399){
-                    let rankString = ("Rank: " + rankScoreA);
-                    context.font = '21px sans-serif';
-                    context.fillText(rankString, 930, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount > 400){
-                    let rankString = ("Rank: " + rankScoreS);
-                    context.font = '21px sans-serif';
-                    context.fillText(rankString, 930, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-         // RANKING SYSTEM, HELP FROM MY OLD C++ GAME, JUST TRIED "JAVASCRIPTIFY" MY CODE
-    }//function end
-
     function choiceManager() { // used logic from old codeberg projects, also some assistance from StackOverflow as I had to make changes.
               if (choice1Xpos < playerX + 100 && //collision from left to right
             choice1Xpos + choiWidth > playerX && // collision from right to left
             choice1Ypos < playerY + 100  && // collision from top to bottom
             choice1Ypos + choiHieght > playerY// collision from bottom to top
             ){
-            window.location.href = "Evilending.html" // TAKES US TO THE BAD ENDING
+            window.location.href = "level1.html" // TAKES US TO THE BAD ENDING
             console.log("TEST FINISHED, EVIL ENDING LOAD");
         }
 
@@ -263,7 +196,7 @@ function writeScore(){ // WRITING THE SCORE TO THE SCREEN
             choice2Ypos < playerY + 100  && // collision from top to bottom
             choice2Ypos + choiHieght > playerY // collision from bottom to top
             ){
-            window.location.href = "goodEnding.html" // TAKES US TO THE BAD ENDING
+            window.location.href = "level2.html" // TAKES US TO THE BAD ENDING
             console.log("TEST FINISHED, NICE ENDING LOAD");
         }
 
@@ -272,7 +205,7 @@ function writeScore(){ // WRITING THE SCORE TO THE SCREEN
             choice3Ypos < playerY + 100 && // collision from top to bottom
             choice3Ypos + choiHieght > playerY // collision from bottom to top
             ){
-            window.location.href = "normalEnding.html" // TAKES US TO THE BAD ENDING
+            window.location.href = "level3.html" // TAKES US TO THE BAD ENDING
             console.log("TEST FINISHED, NEUTRAL ENDING LOAD");
         }
     }     

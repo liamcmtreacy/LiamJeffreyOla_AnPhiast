@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Liam Treacy" content="An Phiast's Decisions">
+    <title>An Phiast's Decisions</title>
+    <link href="assets/css/screen.css" rel="stylesheet" text="text/css">
+</head>
+<body>
+
+    <h1 id="main-header">Welcome To The Level: Phiast Plantation</h1>
+    <h1 id ="instructionsGame"> The choice is yours </h1>
+
+    <section class="wrapper">
+        <canvas id="LT_CANV" width="1100" height="500">
+            Oops! looks like your browser does not support canvas tag
+        </canvas>
+    </section>
+
+        <label for = "volumeControl"> Adjust The Volume </label>
+    <input type = "range" id = "volumeSlider" min = "0" max = "100" value = "100">
+    <span id = "volumeValue">100</span>
+
+    <table>
+        <tbody>
+          <tr>
+            <td>&nbsp;</td>
+            <td><button onmousedown="clickDpadYellow()" onmouseup="clickableDpadReleased()" class="button yellow round">Y</button></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><button onmousedown="clickDpadBlue()" onmouseup="clickableDpadReleased()" class="button blue round">X</button></td>
+            <td>&nbsp;</td>
+            <td><button onmousedown="clickDpadRed()" onmouseup="clickableDpadReleased()" class="button red round">B</button></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><button onmousedown="clickDpadGreen()" onmouseup="clickableDpadReleased()" class="button green round">A</button></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+
+    <table id = "TABLE01">
+        <tr> 
+          <td> INSTRUCTIONS </td>
+        </tr>
+        <tr>
+          <td> You are about to play our game, this game is inspired by choose your own adventure style games, with a morality system also inspired
+            by many games, each stage gives you options to choose, good, evil or sometimes neutral. How you play this game is up to you, choose the path 
+            that feel smost right to you, and carve your own journey.
+          </td>
+        </tr>
+</table>
+  
+<script type="text/javascript" src="assets/js/level1.js"></script>
+</body>
