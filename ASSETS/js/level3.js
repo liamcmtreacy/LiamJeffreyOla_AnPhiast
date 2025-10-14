@@ -23,6 +23,13 @@ const choice2Ypos = 400;
 const choice3Xpos = 550;
 const choice3Ypos = 80;
 
+let mission3display = true; // start true so it shows automatically
+ 
+setTimeout(() => { // stack overflow help
+  mission3display = false;
+  console.log("Dialogue disappeared after 5 seconds");
+}, 5000);
+
 let choiWidth = 100;
 let choiHieght = 100;
 
@@ -123,6 +130,7 @@ function input(event) {
 
 function update () // important function.
 {
+    console.log(username);
     // laughably simple movement attempt
     if (gamerInput.action === "Left")  
         {
@@ -148,6 +156,15 @@ function update () // important function.
      if (gamerInput.action !== "None") { // TESTING PURPOSES, WHILE THE PLAYER NOVES, POINTS GO UP 
         scoreCount += 1;
     }
+    collisionCheck();
+}
+
+function collisionCheck() {
+       // MAKE PLAYER STAY IN CANVAS
+    if (playerX < 0) playerX = 0;
+    if (playerY < 0) playerY = 0;
+    if (playerX + 100 > canvas.width) playerX = canvas.width - 100;
+    if (playerY + 100 > canvas.height) playerY = canvas.height - 100;
 }
 
 // DRAWING IMAGES
@@ -157,8 +174,20 @@ function update () // important function.
     // Draw green square
     context.fillStyle = "green";
     context.fillRect(playerX, playerY, 100, 100);
-    writeScore();
-  }    
+
+        
+    if (mission3display) {
+  // black box help from stack overflow
+    context.fillStyle = "black";
+    context.fillRect(50, canvas.height - 120, canvas.width - 100, 80);
+
+  // white text
+  context.fillStyle = "white";
+  context.font = "20px sans-serif";
+  context.fillText("Those papers look like me, why are they drawing pictures of me?", 70, canvas.height - 80);
+  }   
+     writeScore(); 
+}
     
     function writeScore(){ // WRITING THE SCORE TO THE SCREEN
 
@@ -210,6 +239,7 @@ function update () // important function.
     else if (scoreCount>= 300  && scoreCount<= 399){
                     let rankString = ("Rank: " + rankScoreA);
                     context.font = '21px sans-serif';
+                    context.fillStyle = "yellow";
                     context.fillText(rankString, 600, 25);
                     console.log("RANKING BEING DONE");
                 }
@@ -232,6 +262,7 @@ function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
     console.log("dpad yellow pressed");
     console.log("Move Up");
     playerY -= speed
+    collisionCheck();
     console.log("MOVE UP, ENEMY INVERSED");
     currentDirection = 1; // DIRECTION
 }
@@ -239,6 +270,7 @@ function clickDpadBlue(){
     console.log("dpad blue pressed");
     console.log("Move Left");
     playerX -= speed
+    collisionCheck();
     console.log("MOVE LEFT");
     currentDirection = 2;//DIRECTOION
 }
@@ -246,12 +278,14 @@ function clickDpadRed(){
     console.log("dpad red pressed");
     console.log("Move Right");
     playerX += speed
+    collisionCheck();
     console.log("MOVE RIGHT");
     currentDirection = 3;//DIRECTION
 }
 function clickDpadGreen(){
     console.log("dpad green pressed");
     console.log("Move Down");
+    collisionCheck();
     playerY += speed
     currentDirection = 0; // DIRECTION
     }

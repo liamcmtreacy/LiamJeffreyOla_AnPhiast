@@ -149,7 +149,17 @@ function update () // important function.
         scoreCount += 1;
     }
     choiceManager();
+    collisionCheck();
 }
+
+function collisionCheck() {
+       // MAKE PLAYER STAY IN CANVAS
+    if (playerX < 0) playerX = 0;
+    if (playerY < 0) playerY = 0;
+    if (playerX + 100 > canvas.width) playerX = canvas.width - 100;
+    if (playerY + 100 > canvas.height) playerY = canvas.height - 100;
+}
+
 
 // DRAWING IMAGES
   function draw() {
@@ -168,17 +178,6 @@ function update () // important function.
 
     context.fillStyle = "blue";
     context.fillRect(550, 80, choice1width, choice1height);
-    
-    // trying to do a path choice thing,
-/*
-  if (selectedChoice === choice1) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
-  ctx.fillText(choice1, 150, 140);
-
-  if (selectedChoice === choice2) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
-  ctx.fillText(choice2, 150, 170);
-
-  if (selectedChoice === choice3) ctx.fillStyle = "yellow"; else ctx.fillStyle = "white";
-  ctx.fillText(choice3, 150, 200); // won't work until more code written, may not even work all together. */
 }
 
     function choiceManager() { // used logic from old codeberg projects, also some assistance from StackOverflow as I had to make changes.
@@ -217,6 +216,7 @@ function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
     console.log("dpad yellow pressed");
     console.log("Move Up");
     playerY -= speed
+    collisionCheck();
     console.log("MOVE UP, ENEMY INVERSED");
     currentDirection = 1; // DIRECTION
 }
@@ -224,6 +224,7 @@ function clickDpadBlue(){
     console.log("dpad blue pressed");
     console.log("Move Left");
     playerX -= speed
+    collisionCheck();
     console.log("MOVE LEFT");
     currentDirection = 2;//DIRECTOION
 }
@@ -232,12 +233,14 @@ function clickDpadRed(){
     console.log("Move Right");
     playerX += speed
     console.log("MOVE RIGHT");
+    collisionCheck();
     currentDirection = 3;//DIRECTION
 }
 function clickDpadGreen(){
     console.log("dpad green pressed");
     console.log("Move Down");
     playerY += speed
+    collisionCheck();
     currentDirection = 0; // DIRECTION
     }
 

@@ -10,7 +10,13 @@ let playerX = 200;
 let playerY = 200;
 
 
-//choice boxes, gonna change to text boxes, but for our demo it will be very simple.
+let mission2display = true; // set true automatically so it shows up.
+
+setTimeout(() => { // stack overflow help
+  mission2display = false;
+  console.log("Dialogue disappeared after 5 seconds");
+}, 5000);
+
 
 let speed = 2;
 let currentDirection = 0;
@@ -128,6 +134,15 @@ function update () // important function.
      if (gamerInput.action !== "None") { // TESTING PURPOSES, WHILE THE PLAYER NOVES, POINTS GO UP 
         scoreCount += 1;
     }
+    collisionCheck();
+}
+
+function collisionCheck() {
+       // MAKE PLAYER STAY IN CANVAS
+    if (playerX < 0) playerX = 0;
+    if (playerY < 0) playerY = 0;
+    if (playerX + 100 > canvas.width) playerX = canvas.width - 100;
+    if (playerY + 100 > canvas.height) playerY = canvas.height - 100;
 }
 
 // DRAWING IMAGES
@@ -137,6 +152,18 @@ function update () // important function.
     // Draw green square
     context.fillStyle = "green";
     context.fillRect(playerX, playerY, 100, 100);
+
+    
+    if (mission2display) {
+  // black box help from stack overflow
+    context.fillStyle = "black";
+    context.fillRect(50, canvas.height - 120, canvas.width - 100, 80);
+
+  // white text
+  context.fillStyle = "white";
+  context.font = "20px sans-serif";
+  context.fillText("An Phiast, I'm so glad you could make it, welcome to my party", 70, canvas.height - 80);
+}
 
     writeScore();
   }    
@@ -191,6 +218,7 @@ function update () // important function.
     else if (scoreCount>= 300  && scoreCount<= 399){
                     let rankString = ("Rank: " + rankScoreA);
                     context.font = '21px sans-serif';
+                    context.fillStyle = "yellow";
                     context.fillText(rankString, 600, 25);
                     console.log("RANKING BEING DONE");
                 }
@@ -214,6 +242,7 @@ function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
     console.log("dpad yellow pressed");
     console.log("Move Up");
     playerY -= speed
+    collisionCheck();
     console.log("MOVE UP, ENEMY INVERSED");
     currentDirection = 1; // DIRECTION
 }
@@ -221,6 +250,7 @@ function clickDpadBlue(){
     console.log("dpad blue pressed");
     console.log("Move Left");
     playerX -= speed
+    collisionCheck();
     console.log("MOVE LEFT");
     currentDirection = 2;//DIRECTOION
 }
@@ -228,12 +258,14 @@ function clickDpadRed(){
     console.log("dpad red pressed");
     console.log("Move Right");
     playerX += speed
+    collisionCheck();
     console.log("MOVE RIGHT");
     currentDirection = 3;//DIRECTION
 }
 function clickDpadGreen(){
     console.log("dpad green pressed");
     console.log("Move Down");
+    collisionCheck();
     playerY += speed
     currentDirection = 0; // DIRECTION
     }
