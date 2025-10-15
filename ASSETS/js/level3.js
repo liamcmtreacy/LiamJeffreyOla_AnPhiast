@@ -40,6 +40,7 @@ let playerY = 200;
 //choice boxes, gonna change to text boxes, but for our demo it will be very simple.
 
 let speed = 2;
+let DpadSpeed = 9;
 let currentDirection = 0;
 
 let selectedChoice = 0; // This number says which option is currently highlighted (starts at 0 = "Good") // this will change though depending on your choice,
@@ -59,7 +60,7 @@ if (score){
 
 //AUDIO Declaring
 
-let newSoundTrack = new Audio("assets/audio/DOTH.mp3");
+let newSoundTrack = new Audio("ASSETS/audio/DOTH.mp3");
 
     // audioplayer
     setInterval(playSound, 1200); //gap between audio playing
@@ -261,7 +262,7 @@ function collisionCheck() {
 function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
     console.log("dpad yellow pressed");
     console.log("Move Up");
-    playerY -= speed
+    playerY -= DpadSpeed
     collisionCheck();
     console.log("MOVE UP, ENEMY INVERSED");
     currentDirection = 1; // DIRECTION
@@ -269,7 +270,7 @@ function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
 function clickDpadBlue(){
     console.log("dpad blue pressed");
     console.log("Move Left");
-    playerX -= speed
+    playerX -= DpadSpeed
     collisionCheck();
     console.log("MOVE LEFT");
     currentDirection = 2;//DIRECTOION
@@ -277,7 +278,7 @@ function clickDpadBlue(){
 function clickDpadRed(){
     console.log("dpad red pressed");
     console.log("Move Right");
-    playerX += speed
+    playerX += DpadSpeed
     collisionCheck();
     console.log("MOVE RIGHT");
     currentDirection = 3;//DIRECTION
@@ -286,7 +287,7 @@ function clickDpadGreen(){
     console.log("dpad green pressed");
     console.log("Move Down");
     collisionCheck();
-    playerY += speed
+    playerY += DpadSpeed
     currentDirection = 0; // DIRECTION
     }
 
