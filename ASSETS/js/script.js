@@ -26,8 +26,10 @@ const choice3Ypos = 80;
 let choiWidth = 100;
 let choiHieght = 100;
 
-let playerX = 200;
-let playerY = 200;
+
+// replaced with one player value declared near bottom for player animation (wip)
+// let playerX = 200;
+// let playerY = 200;
 
 
 //choice boxes, gonna change to text boxes, but for our demo it will be very simple.
@@ -127,23 +129,27 @@ function update () // important function.
     // laughably simple movement attempt
     if (gamerInput.action === "Left")  
         {
-            playerX -= speed;
+            aChar.x -= speed;
             console.log("Player Moveed Left");
+            currentDirection = 2;//DIRECTOION
         }
     if (gamerInput.action === "Right") 
         {
-            playerX += speed;
+            aChar.x += speed;
             console.log("Player Moveed Right");
+            currentDirection = 3;//DIRECTION
         }
     if (gamerInput.action === "Up")    
         {
-            playerY -= speed;
+            aChar.y -= speed;
             console.log("Player Went Up");
+            currentDirection = 1; // DIRECTION
         }
     if (gamerInput.action === "Down")  
     {
-        playerY += speed;
+        aChar.y += speed;
         console.log("Player Went Down");
+        currentDirection = 0;//DIRECTION
     }
 
      if (gamerInput.action !== "None") { // TESTING PURPOSES, WHILE THE PLAYER NOVES, POINTS GO UP 
@@ -155,10 +161,10 @@ function update () // important function.
 
 function collisionCheck() {
        // MAKE PLAYER STAY IN CANVAS
-    if (playerX < 0) playerX = 0;
-    if (playerY < 0) playerY = 0;
-    if (playerX + 100 > canvas.width) playerX = canvas.width - 100;
-    if (playerY + 100 > canvas.height) playerY = canvas.height - 100;
+    if (aChar.x < 0) aChar.x = 0;
+    if (aChar.y < 0) aChar.y = 0;
+    if (aChar.x + 100 > canvas.width) aChar.x = canvas.width - 100;
+    if (aChar.y + 100 > canvas.height) aChar.y = canvas.height - 100;
 }
 
 
@@ -167,8 +173,8 @@ function collisionCheck() {
     context.clearRect(0, 0, canvas.width, canvas.height); // Clear first
 
     // Draw green square
-    context.fillStyle = "green";
-    context.fillRect(playerX, playerY, 100, 100);
+    //context.fillStyle = "green";
+    //context.fillRect(aChar.x, aChar.y, 100, 100);
 
     context.fillStyle = "red";
     context.fillRect(60, 140, 100, 100);
@@ -190,31 +196,33 @@ function collisionCheck() {
       context.fillStyle = "white";
   context.font = "16px sans-serif";
   context.fillText("The Papers", 550, 120);
+
+    animate();
 }
 
     function choiceManager() { // used logic from old codeberg projects, also some assistance from StackOverflow as I had to make changes.
-              if (choice1Xpos < playerX + 100 && //collision from left to right
-            choice1Xpos + choiWidth > playerX && // collision from right to left
-            choice1Ypos < playerY + 100  && // collision from top to bottom
-            choice1Ypos + choiHieght > playerY// collision from bottom to top
+              if (choice1Xpos < aChar.x + 100 && //collision from left to right
+            choice1Xpos + choiWidth > aChar.x && // collision from right to left
+            choice1Ypos < aChar.y + 100  && // collision from top to bottom
+            choice1Ypos + choiHieght > aChar.y// collision from bottom to top
             ){
             window.location.href = "level1.html" // TAKES US TO THE BAD ENDING
             console.log("TEST FINISHED, EVIL ENDING LOAD");
         }
 
-              if (choice2Xpos < playerX + 100  && //collision from left to right
-            choice2Xpos + choiWidth > playerX && // collision from right to left
-            choice2Ypos < playerY + 100  && // collision from top to bottom
-            choice2Ypos + choiHieght > playerY // collision from bottom to top
+              if (choice2Xpos < aChar.x + 100  && //collision from left to right
+            choice2Xpos + choiWidth > aChar.x && // collision from right to left
+            choice2Ypos < aChar.y + 100  && // collision from top to bottom
+            choice2Ypos + choiHieght > aChar.y // collision from bottom to top
             ){
             window.location.href = "level2.html" // TAKES US TO THE BAD ENDING
             console.log("TEST FINISHED, NICE ENDING LOAD");
         }
 
-          if (choice3Xpos < playerX + 100  && //collision from left to right
-            choice3Xpos + choiWidth > playerX && // collision from right to left
-            choice3Ypos < playerY + 100 && // collision from top to bottom
-            choice3Ypos + choiHieght > playerY // collision from bottom to top
+          if (choice3Xpos < aChar.x + 100  && //collision from left to right
+            choice3Xpos + choiWidth > aChar.x && // collision from right to left
+            choice3Ypos < aChar.y + 100 && // collision from top to bottom
+            choice3Ypos + choiHieght > aChar.y // collision from bottom to top
             ){
             window.location.href = "level3.html" // TAKES US TO THE BAD ENDING
             console.log("TEST FINISHED, NEUTRAL ENDING LOAD");
@@ -227,7 +235,7 @@ function collisionCheck() {
 function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
     console.log("dpad yellow pressed");
     console.log("Move Up");
-    playerY -= DpadSpeed
+    aChar.y -= DpadSpeed
     collisionCheck();
     console.log("MOVE UP, ENEMY INVERSED");
     currentDirection = 1; // DIRECTION
@@ -235,7 +243,7 @@ function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
 function clickDpadBlue(){
     console.log("dpad blue pressed");
     console.log("Move Left");
-    playerX -= DpadSpeed
+    aChar.x -= DpadSpeed
     collisionCheck();
     console.log("MOVE LEFT");
     currentDirection = 2;//DIRECTOION
@@ -243,7 +251,7 @@ function clickDpadBlue(){
 function clickDpadRed(){
     console.log("dpad red pressed");
     console.log("Move Right");
-    playerX += DpadSpeed
+    aChar.x += DpadSpeed
     console.log("MOVE RIGHT");
     collisionCheck();
     currentDirection = 3;//DIRECTION
@@ -251,7 +259,7 @@ function clickDpadRed(){
 function clickDpadGreen(){
     console.log("dpad green pressed");
     console.log("Move Down");
-    playerY += DpadSpeed
+    aChar.y += DpadSpeed
     collisionCheck();
     currentDirection = 0; // DIRECTION
     }
@@ -262,6 +270,77 @@ function gameloop() {
     draw();
     window.requestAnimationFrame(gameloop); // GAME LOOP
 }
+
+
+function GameObject(spritesheet, x, y, width, height) {
+    this.spritesheet = spritesheet;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.currentDirection = "None";
+}
+
+let playerChar = new Image();
+playerChar.src = "ASSETS/imgs/anPhiastSpritesheet.png";
+let aChar = new GameObject(playerChar, canvas.width/2, canvas.height/2, 750, 983);
+
+const scaleChar = 0.1;
+const widthChar = 750;
+const heightChar = 983;
+const scaledWidth = scaleChar * widthChar;
+const scaledHeight = scaleChar * heightChar;
+const walkLoop = [0, 1, 2, 3];
+const frameLimit = 50;
+
+let currentLoopIndex = 0;
+let frameCount = 0;
+
+function drawFrame(image, frameX, frameY, canvasX, canvasY) {
+    context.drawImage(image,
+                  frameX * widthChar, frameY * heightChar, widthChar, heightChar,
+                  canvasX, canvasY, scaledWidth, scaledHeight);
+}
+
+function animate() {
+    if (gamerInput.action != "None"){
+        frameCount++;
+        if (frameCount >= frameLimit) {
+            frameCount = 0;
+            currentLoopIndex++;
+            if (currentLoopIndex >= walkLoop.length) {
+                currentLoopIndex = 0;
+            }
+        }      
+    }
+    else{
+        currentLoopIndex = 0;
+    }
+    drawFrame(aChar.spritesheet, walkLoop[currentLoopIndex], currentDirection, aChar.x, aChar.y);
+}
+
+function step() {
+
+      frameCount++;
+      if (frameCount < 15) {
+        window.requestAnimationFrame(step);
+        return;
+      }
+      frameCount = 0;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      
+      drawFrame(walkLoop[currentLoopIndex], currentDirection, 0, 0);
+      currentLoopIndex++;
+      if (currentLoopIndex >= walkLoop.length) {
+        currentLoopIndex = 0;
+        console.log("changing direction to dir: " + currentDirection);
+        currentDirection++;
+      }
+      if (currentDirection >= 4) {
+        currentDirection = 0;
+      }
+      window.requestAnimationFrame(step);
+    }
 
 // Handle Active Browser Tag Animation
 window.requestAnimationFrame(gameloop);
