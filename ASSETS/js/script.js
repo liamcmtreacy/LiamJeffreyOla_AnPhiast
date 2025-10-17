@@ -163,7 +163,7 @@ function collisionCheck() {
        // MAKE PLAYER STAY IN CANVAS
     if (aChar.x < 0) aChar.x = 0;
     if (aChar.y < 0) aChar.y = 0;
-    if (aChar.x + 100 > canvas.width) aChar.x = canvas.width - 100;
+    if (aChar.x + 70 > canvas.width) aChar.x = canvas.width - 70;
     if (aChar.y + 100 > canvas.height) aChar.y = canvas.height - 100;
 }
 
