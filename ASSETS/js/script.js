@@ -282,12 +282,12 @@ function GameObject(spritesheet, x, y, width, height) {
 }
 
 let playerChar = new Image();
-playerChar.src = "ASSETS/imgs/anPhiastSpritesheet.png";
-let aChar = new GameObject(playerChar, canvas.width/2, canvas.height/2, 750, 983);
+playerChar.src = "ASSETS/imgs/anPhiastSpritesheet1.png";
+let aChar = new GameObject(playerChar, canvas.width/2, canvas.height/2, 750, 1037);
 
 const scaleChar = 0.1;
 const widthChar = 750;
-const heightChar = 983;
+const heightChar = 1037;
 const scaledWidth = scaleChar * widthChar;
 const scaledHeight = scaleChar * heightChar;
 const walkLoop = [0, 1, 2, 3];
