@@ -1,288 +1,84 @@
-const canvas = document.getElementById("LT_CANV") // CANVAS COMING IN
+const canvas = document.getElementById("LT_CANV");
 const context = canvas.getContext("2d");
-// CONSTANTS
-const scale = 2;
-const width = 16;
-const height = 18;
-//choice boxes, gonna change to text boxes, but for our demo it will be very simple.
 
-let playerX = 200;
-let playerY = 200;
-//boolean for T/F
+let mission1display = true;
 
-let mission1display = true; // start true so it shows automatically
- 
-setTimeout(() => { // stack overflow help
+setTimeout(() => {
   mission1display = false;
   console.log("Dialogue disappeared after 5 seconds");
 }, 5000);
 
-//choice boxes, gonna change to text boxes, but for our demo it will be very simple.
+const startBtn = document.getElementById("startMusic");
 
-let speed = 2;
-let DpadSpeed = 9;
-let currentDirection = 0;
+startBtn.addEventListener("click", () => {
+    newSound1stLevel.play();       // start the music
+    startBtn.style.display = "none"; // hide the button after clicking
+});
 
-let selectedChoice = 0; // This number says which option is currently highlighted (starts at 0 = "Good") // this will change though depending on your choice,
-// These are the 3 choices you can pick
-let choice1 = "Good";
-let choice2 = "Neutral";
-let choice3 = "Evil";
-
-// LET DECLARATION METHOD
-let username = localStorage.getItem('username'); // OUR USERNAME
-let score = localStorage.getItem('score'); // THE SCORE
-
-let scoreCount = 0; // SCORE INITIALISED AS ZERO
-if (score){
-    scoreCount = score;
-} 
-
-//AUDIO Declaring
+let scoreCount = 0;
 
 let newSound1stLevel = new Audio("ASSETS/audio/chillSmooth.mp3");
-
-    // audioplayer
-    setInterval(playSound, 1200); //gap between audio playing
-    
-    function playSound(){ // function
-    console.log ("MUSIC LOOP"); // message to the console
-
-    newSound1stLevel.play(); // BACKGROUND MUSIC
-    newSound1stLevel.loop = true;
-    }
-
-// volumeADJUSTMENT
+newSound1stLevel.loop = true;
+newSound1stLevel.play();
 
 const volumeSlider = document.getElementById("volumeSlider");
 const volumeValue = document.getElementById("volumeValue");
- newSound1stLevel.volume = volumeSlider.value/100;
+newSound1stLevel.volume = volumeSlider.value / 100;
 
-// VOLUME ADJUSTER, I GOT HELP FROM MY FRIEND JEFFREY, FROM WHAT I UNDERSTAND IT TAKES AN INPUT AND CAN BE REDUCED AS THE SLIDER
-//GOES DOWN
 volumeSlider.addEventListener("input", () => {
-const volume = volumeSlider.value / 100;
-
- newSound1stLevel.volume = volume;
-volumeValue.textContent = volumeSlider.value;
+  const volume = volumeSlider.value / 100;
+  newSound1stLevel.volume = volume;
+  volumeValue.textContent = volumeSlider.value;
 });
 
-// The GamerInput is an Object that holds the Current
-// GamerInput (Left, Right, Up, Down, MouseClicks)
-function GamerInput(input) {
-    this.action = input; // Hold the current input as a string
+let BACKGROUND = new Image();
+BACKGROUND.src = "ASSETS/imgs/BGlevel1.png";
+
+let thinking = new Image();
+thinking.src = "ASSETS/imgs/thinking.png";
+
+let imagesLoaded = 0;
+
+BACKGROUND.onload = () => { imagesLoaded++; checkAllLoaded(); };
+thinking.onload = () => { imagesLoaded++; checkAllLoaded(); };
+
+function checkAllLoaded() {
+  if (imagesLoaded === 2) {
+    console.log("All images loaded — starting gameloop");
+    window.requestAnimationFrame(gameloop);
+  }
 }
 
-// Default GamerInput is set to None
-let gamerInput = new GamerInput("None"); //No Input
+function draw() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
-function input(event) {
-    // Take Input from the Player
-    // console.log("Input");
-    // console.log("Event type: " + event.type);
-    //console.log("Keycode: " + event.keyCode);
+  context.drawImage(BACKGROUND, 0, 0, canvas.width, canvas.height);
+  context.drawImage(thinking, 10, 10, 200, 200);
 
-    if (event.type === "keydown") {
-        switch (event.keyCode) {
-            case 37: // Left Arrow
-                gamerInput = new GamerInput("Left");
-                break; //Left key
-            case 38: // Up Arrow
-                gamerInput = new GamerInput("Up");
-                break; //Up key
-            case 39: // Right Arrow
-                gamerInput = new GamerInput("Right");
-                break; //Right key
-            case 40: // Down Arrow
-                gamerInput = new GamerInput("Down");
-                break; //Down key
-                
-            case 83:
-                speed = 4;
-                break;
-            default:
-             gamerInput = new GamerInput("None"); //No Input
-        }
-    } else {
-        gamerInput = new GamerInput("None");
-        speed = 2;
-    }
-}
-
-function update () // important function.
-{
-    // laughably simple movement attempt
-    if (gamerInput.action === "Left")  
-        {
-            playerX -= speed;
-            console.log("Player Moveed Left");
-        }
-    if (gamerInput.action === "Right") 
-        {
-            playerX += speed;
-            console.log("Player Moveed Right");
-        }
-    if (gamerInput.action === "Up")    
-        {
-            playerY -= speed;
-            console.log("Player Went Up");
-        }
-    if (gamerInput.action === "Down")  
-    {
-        playerY += speed;
-        console.log("Player Went Down");
-    }
-
-     if (gamerInput.action !== "None") { // TESTING PURPOSES, WHILE THE PLAYER NOVES, POINTS GO UP 
-        scoreCount += 1;
-    }
-    collisionCheck();
-}
-
-function collisionCheck() {
-       // MAKE PLAYER STAY IN CANVAS
-    if (playerX < 0) playerX = 0;
-    if (playerY < 0) playerY = 0;
-    if (playerX + 100 > canvas.width) playerX = canvas.width - 100;
-    if (playerY + 100 > canvas.height) playerY = canvas.height - 100;
-}
-
-// DRAWING IMAGES
-  function draw() {
-    context.clearRect(0, 0, canvas.width, canvas.height); // Clear first
-
-    // Draw green square
-    context.fillStyle = "green";
-    context.fillRect(playerX, playerY, 100, 100);
-
-    if (mission1display) {
-  // black box help from stack overflow
+  if (mission1display) {
     context.fillStyle = "black";
     context.fillRect(50, canvas.height - 120, canvas.width - 100, 80);
 
-  // white text
-  context.fillStyle = "white";
-  context.font = "20px sans-serif";
-  context.fillText("An Phiast, help I need my ball!", 70, canvas.height - 80);
-}
-
-    writeScore();
-  }    
-    
-    function writeScore(){ // WRITING THE SCORE TO THE SCREEN
-
-    let rankScoreE = "E"; //E
-    let rankScoreD = "D"; //D
-    let rankScoreC = "C"; //C
-    let rankScoreB = "B"; //B
-    let rankScoreA = "A"; //A
-    let rankScoreS = "S"; //S
-    
-    let scoreString = ("SCORE: " + scoreCount); // SCORE STRING GRABBING THE NUMBER AND SHOWING IT ON SCREEN
-    context.font = '21px sans-serif'; // FONT
     context.fillStyle = "white";
-    context.fillText(scoreString, 600, 50); //DRAWING STRING
-    console.log("score is being counted");
+    context.font = "20px sans-serif";
+    context.fillText("An Phiast, help I need my ball!", 70, canvas.height - 80);
+  }
 
-    if (scoreCount <= 10) { // RANKING SYSTEM IF STATEMENTS, ALL WORK BY CHECKING IF A NUMBER MATCHES CERTAIN VALUES, AND WHATEVER ONES IT DOES MATCH DRAW THE CORROSPONDING RANK
-            let rankString = ("Rank: " + rankScoreE);
-            context.fillStyle = "yellow";
-            context.font = '21px sans-serif';
-            context.fillText(rankString, 600, 25);
-            console.log("RANKING BEING DONE");
-        }
-        
-    else if (scoreCount >= 1 && scoreCount <= 100) {
-                    let rankString = ("Rank: " + rankScoreD);
-                    context.font = '21px sans-serif';
-                      context.fillStyle = "yellow";
-                    context.fillText(rankString, 600, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount >= 101 && scoreCount <= 199){
-                    let rankString = ("Rank: " + rankScoreC);
-                    context.font = '21px sans-serif';
-                    context.fillStyle = "yellow";
-                    context.fillText(rankString, 600, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount>= 200 && scoreCount <= 299){
-                    let rankString = ("Rank: " + rankScoreB);
-                    context.font = '21px sans-serif';
-                    context.fillStyle = "yellow";
-                    context.fillText(rankString, 600, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount>= 300  && scoreCount<= 399){
-                    let rankString = ("Rank: " + rankScoreA);
-                    context.font = '21px sans-serif';
-                    context.fillStyle = "yellow";
-                    context.fillText(rankString, 600, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-    else if (scoreCount > 400){
-                    let rankString = ("Rank: " + rankScoreS);
-                    context.font = '21px sans-serif';
-                    context.fillStyle = "yellow";
-                    context.fillText(rankString, 600, 25);
-                    console.log("RANKING BEING DONE");
-                }
-
-         // RANKING SYSTEM, HELP FROM MY OLD C++ GAME, JUST TRIED "JAVASCRIPTIFY" MY CODE
-    }//function end
-    
-    
-    function clickableDpadReleased() {
-    console.log("dpad released"); // REPORT TO THE CONSOLE
+  writeScore();
 }
-function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
-    console.log("dpad yellow pressed");
-    console.log("Move Up");
-    playerY -= DpadSpeed;
-    console.log("MOVE UP, ENEMY INVERSED");
-    currentDirection = 1; // DIRECTION
-    collisionCheck();
-}
-function clickDpadBlue(){
-    console.log("dpad blue pressed");
-    console.log("Move Left");
-    playerX -= DpadSpeed;
-    console.log("MOVE LEFT");
-    currentDirection = 2;//DIRECTOION
-    collisionCheck();
-}
-function clickDpadRed(){
-    console.log("dpad red pressed");
-    console.log("Move Right");
-    playerX += DpadSpeed;
-    console.log("MOVE RIGHT");
-    currentDirection = 3;//DIRECTION
-    collisionCheck();
-}
-function clickDpadGreen(){
-    console.log("dpad green pressed");
-    console.log("Move Down");
-    playerY += DpadSpeed;
-    currentDirection = 0; // DIRECTION
-    collisionCheck();
-    }
 
+function writeScore() {
+  context.font = '21px sans-serif';
+  context.fillStyle = "white";
+  context.fillText("SCORE: " + scoreCount, 600, 50);
+}
+
+function update() {
+  // No movement needed
+}
 
 function gameloop() {
-    update();
-    draw();
-    window.requestAnimationFrame(gameloop); // GAME LOOP
+  update();
+  draw();
+  window.requestAnimationFrame(gameloop);
 }
-
-// Handle Active Browser Tag Animation
-window.requestAnimationFrame(gameloop);
-
-// https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
-
-window.addEventListener('keydown', input);
-// disable the second event listener if you want continuous movement
-window.addEventListener('keyup', input);

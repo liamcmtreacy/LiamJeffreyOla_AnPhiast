@@ -67,6 +67,11 @@ let newSound1 = new Audio("ASSETS/audio/cinematic.mp3");
     newSound1.loop = true;
     }
 
+    //BG Image
+
+    let BACKGROUND = new Image();
+    BACKGROUND.src = "ASSETS/imgs/levelSelectBG.png";
+
 // volumeADJUSTMENT
 
 const volumeSlider = document.getElementById("volumeSlider");
@@ -171,6 +176,8 @@ function collisionCheck() {
 // DRAWING IMAGES
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height); // Clear first
+
+        context.drawImage(BACKGROUND, 0, 0, canvas.width, canvas.height); // DRAWING BACKGROUND IN THE DRAW FUNCTION
 
     // Draw green square
     //context.fillStyle = "green";
