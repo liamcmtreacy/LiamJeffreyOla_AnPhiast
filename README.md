@@ -9,3 +9,5 @@ https://www.w3schools.com/js/js_events.asp W3SCHOOLS
 
 https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial huge help
 https://eloquentjavascript.net/17_canvas.html 
+
+https://stackoverflow.com/questions/73106334/fading-in-a-canvas-object-in-javascript 
