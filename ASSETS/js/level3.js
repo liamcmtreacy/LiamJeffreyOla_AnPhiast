@@ -27,6 +27,9 @@ let username = localStorage.getItem('username');
 let score = localStorage.getItem('score');
 let scoreCount = score ? score : 0;
 
+let newbackground = new Image();
+newbackground.src = "ASSETS/imgs/PapersBG.png";
+
 // AUDIO
 let newSound03 = new Audio("ASSETS/audio/DOTH.mp3");
 setInterval(playSound, 1200);
@@ -113,6 +116,7 @@ function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.fillStyle = "red"; // clickable box box
+    context.drawImage(newbackground, 0, 0, canvas.width, canvas.height);
     context.fillRect(badEndBox.x, badEndBox.y, badEndBox.width, badEndBox.height);
 
     // Draw clicks left 
