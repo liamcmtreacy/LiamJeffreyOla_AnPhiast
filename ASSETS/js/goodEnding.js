@@ -1,10 +1,10 @@
 
-let newSound03 = new Audio("ASSETS/audio/goodFuture.mp3");
+let newSoundHooray = new Audio("ASSETS/audio/acGuitar.mp3");
 
 function playEnding(){//PLAY THAT MUSIC!
 
 console.log("ENDING");
-newSound03.play();
+newSoundHooray.play();
 }
 setInterval(playEnding, 1400);
 

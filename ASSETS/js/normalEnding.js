@@ -9,3 +9,7 @@ newSoundNeutral.play();
 setInterval(playEnding, 1400);
 
 // THIS SCRIPT'S ONLY PURPOSE IS TO PLAY THE ENDING MUSIC FOR THE GAME
+
+let imageN = new image();
+
+imageN.src = "ASSETS/imgs/NeutralIconAnPhiast.png";
