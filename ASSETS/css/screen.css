@@ -39,6 +39,16 @@ body {
     height: auto;      
 }
 
+#goodPhiast { /* for allignment reasons */
+    text-align: center;
+    margin-top: -180px;   
+}
+
+#niceEnd {
+    width: 200px;      
+    height: auto;      
+}
+
 #badEnding {
     color: white;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

@@ -10,14 +10,14 @@ setTimeout(() => {
 }, 5000);
 
 //music
-const startBtn = document.getElementById("startMusic");
+const startButton = document.getElementById("startMusic");
 let newSound1stLevel = new Audio("ASSETS/audio/chillSmooth.mp3");
 newSound1stLevel.loop = true;
 newSound1stLevel.play();
 
-startBtn.addEventListener("click", () => {
+startButton.addEventListener("click", () => {
   newSound1stLevel.play();
-  startBtn.style.display = "none";
+  startButton.style.display = "none";
 });
 //slider from previous codeberg project
 const volumeSlider = document.getElementById("volumeSlider");

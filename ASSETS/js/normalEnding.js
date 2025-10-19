@@ -13,3 +13,4 @@ setInterval(playEnding, 1400);
 let imageN = new image();
 
 imageN.src = "ASSETS/imgs/NeutralIconAnPhiast.png";
+

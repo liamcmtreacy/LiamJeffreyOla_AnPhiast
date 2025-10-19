@@ -1,10 +1,10 @@
 
-let newSound02 = new Audio("ASSETS/audio/horrorHell.mp3");
+let newSoundEvil = new Audio("ASSETS/audio/horrorHell.mp3");
 
 function playEnding(){//PLAY THAT MUSIC!
 
 console.log("ENDING");
-newSound02.play();
+newSoundEvil.play();
 }
 setInterval(playEnding, 1400);
 
