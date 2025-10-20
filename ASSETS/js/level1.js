@@ -6,8 +6,8 @@ let mission1display = true;
 // Hide dialogue after 5 seconds
 setTimeout(() => {
   mission1display = false;
-  console.log("Dialogue disappeared after 5 seconds");
-}, 5000);
+  console.log("Dialogue disappeared after 8 seconds");
+}, 8000);
 
 //music
 const startButton = document.getElementById("startMusic");
@@ -153,8 +153,8 @@ function draw() {
     context.fillStyle = "black";
     context.fillRect(50, canvas.height - 120, canvas.width - 100, 80);
     context.fillStyle = "white";
-    context.font = "20px sans-serif";
-    context.fillText("An Phiast, help I need my ball!", 70, canvas.height - 80);
+    context.font = "12px sans-serif";
+    context.fillText("An Phiast's younger brother has lost his ball, you have 3 choices here, you can do the good path and retrieve the ball, do nothing or intentionally pop the ball in the dark path", 70, canvas.height - 80);
   }
 
   // Score

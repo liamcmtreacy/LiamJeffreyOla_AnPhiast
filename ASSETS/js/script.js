@@ -72,6 +72,14 @@ let newSound1 = new Audio("ASSETS/audio/cinematic.mp3");
     let BACKGROUND = new Image();
     BACKGROUND.src = "ASSETS/imgs/levelSelectBG.png";
 
+    let icon01 = new Image();
+    icon01.src = "ASSETS/imgs/phiastPlantationicon.png";
+    
+    let icon02 = new Image ();
+    icon02.src = "ASSETS/imgs/partyicon.png";
+
+    let icon03 = new Image ();
+    icon03.src = "ASSETS/imgs/thePapersicon.png";
 // volumeADJUSTMENT
 
 const volumeSlider = document.getElementById("volumeSlider");
@@ -174,35 +182,27 @@ function collisionCheck() {
 
 
 // DRAWING IMAGES
-  function draw() {
-    context.clearRect(0, 0, canvas.width, canvas.height); // Clear first
+function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(BACKGROUND, 0, 0, canvas.width, canvas.height);
 
-        context.drawImage(BACKGROUND, 0, 0, canvas.width, canvas.height); // DRAWING BACKGROUND IN THE DRAW FUNCTION
+    // level icons
 
-    // Draw green square
-    //context.fillStyle = "green";
-    //context.fillRect(aChar.x, aChar.y, 100, 100);
+    context.drawImage(icon01, 60, 220, choice1width, choice1height);
 
-    context.fillStyle = "red";
-    context.fillRect(60, 140, 100, 100);
+    context.fillStyle = "white";
+    context.font = "12px sans-serif";
+    context.fillText("Phiast Plantation", 60, 240);
 
-  context.fillStyle = "white";
-  context.font = "12px sans-serif";
-  context.fillText("Phiast Plantation", 60, 180);
-
+    context.drawImage(icon02, 290, 400, choice1width, choice1height);
     context.fillStyle = "black";
-    context.fillRect(400, 400, choice1width, choice1height);
+    context.font = "12px sans-serif";
+    context.fillText("Dan's Party", 290, 410);
 
-      context.fillStyle = "white";
-  context.font = "16px sans-serif";
-  context.fillText("Dan's Party", 400, 450);
-
-    context.fillStyle = "blue";
-    context.fillRect(550, 80, choice1width, choice1height);
-
-      context.fillStyle = "white";
-  context.font = "16px sans-serif";
-  context.fillText("The Papers", 550, 120);
+    context.drawImage(icon03, 650, 80, choice1width, choice1height);
+    context.fillStyle = "white";
+    context.font = "12px sans-serif";
+    context.fillText("The Papers", 650, 175);
 
     animate();
 }

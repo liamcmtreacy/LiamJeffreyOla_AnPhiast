@@ -133,7 +133,7 @@ function collisionCheck() {
 
 // BACKGROUND
 let BACKGROUND = new Image();
-BACKGROUND.src = "ASSETS/imgs/BGlevel1.png";
+BACKGROUND.src = "ASSETS/imgs/partyBackground.png";
 
 // DRAW
 function draw() {
