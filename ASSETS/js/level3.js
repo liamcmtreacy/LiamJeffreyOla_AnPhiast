@@ -30,6 +30,9 @@ let scoreCount = score ? score : 0;
 let newbackground = new Image();
 newbackground.src = "ASSETS/imgs/PapersBG.png";
 
+let icon = new Image ();
+icon.src = "ASSETS/imgs/papersSprite.png";
+
 // AUDIO
 let newSound03 = new Audio("ASSETS/audio/DOTH.mp3");
 setInterval(playSound, 1200);
@@ -117,7 +120,7 @@ function draw() {
 
     context.fillStyle = "red"; // clickable box box
     context.drawImage(newbackground, 0, 0, canvas.width, canvas.height);
-    context.fillRect(badEndBox.x, badEndBox.y, badEndBox.width, badEndBox.height);
+    context.drawImage(icon, badEndBox.x, badEndBox.y, badEndBox.width, badEndBox.height);
 
     // Draw clicks left 
     context.fillStyle = "white"; 
