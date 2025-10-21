@@ -31,7 +31,7 @@ let newbackground = new Image();
 newbackground.src = "ASSETS/imgs/PapersBG.png";
 
 let icon = new Image ();
-icon.src = "ASSETS/imgs/papersSprite.png";
+icon.src = "ASSETS/imgs/papersDrawing.png";
 
 // AUDIO
 let newSound03 = new Audio("ASSETS/audio/DOTH.mp3");
@@ -187,7 +187,7 @@ if (scoreCount <= 10) { // SIMPLE RANK SYSTEM FROM MY OLD CODEBERG PROJECT ALSO 
     context.fillStyle = "yellow"; 
     context.fillText(rankString, 600, 25); 
     console.log("RANKING BEING DONE"); 
-} else if (scoreCount > 400) {
+} else if (scoreCount >= 400) {
     let rankString = "Rank: " + rankScoreS; 
     context.font = '21px sans-serif'; 
     context.fillStyle = "yellow"; 

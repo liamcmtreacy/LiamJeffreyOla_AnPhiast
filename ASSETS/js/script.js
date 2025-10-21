@@ -226,9 +226,9 @@ function draw() {
             console.log("TEST FINISHED, NICE ENDING LOAD");
         }
 
-          if (choice3Xpos < aChar.x + 100  && //collision from left to right
+          if (choice3Xpos < aChar.x + 30  && //collision from left to right // HAD TO CHANGE VALUES DUE TO WEIRD GLITCH WHERE YOU ENTERED THE LEVEL EARLY
             choice3Xpos + choiWidth > aChar.x && // collision from right to left
-            choice3Ypos < aChar.y + 100 && // collision from top to bottom
+            choice3Ypos < aChar.y + 30 && // collision from top to bottom
             choice3Ypos + choiHieght > aChar.y // collision from bottom to top
             ){
             window.location.href = "level3.html" // TAKES US TO THE BAD ENDING
