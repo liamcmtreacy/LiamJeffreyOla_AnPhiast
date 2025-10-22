@@ -36,7 +36,7 @@ let choiHieght = 100;
 
 let speed = 2;
 let DpadSpeed = 9;
-let currentDirection = 0;
+let currentDirection = -1;
 
 let selectedChoice = 0; // This number says which option is currently highlighted (starts at 0 = "Good") // this will change though depending on your choice,
 // These are the 3 choices you can pick
@@ -133,6 +133,7 @@ function input(event) {
         }
     } else {
         gamerInput = new GamerInput("None");
+        currentDirection = -1; // NO DIRECTION
         speed = 2;
     }
 }
@@ -140,25 +141,25 @@ function input(event) {
 function update () // important function.
 {
     // laughably simple movement attempt
-    if (gamerInput.action === "Left")  
+    if (gamerInput.action === "Left" || currentDirection === 2)  
         {
             aChar.x -= speed;
             console.log("Player Moveed Left");
             currentDirection = 2;//DIRECTOION
         }
-    if (gamerInput.action === "Right") 
+    if (gamerInput.action === "Right" || currentDirection === 3) 
         {
             aChar.x += speed;
             console.log("Player Moveed Right");
             currentDirection = 3;//DIRECTION
         }
-    if (gamerInput.action === "Up")    
+    if (gamerInput.action === "Up" || currentDirection === 1)    
         {
             aChar.y -= speed;
             console.log("Player Went Up");
             currentDirection = 1; // DIRECTION
         }
-    if (gamerInput.action === "Down")  
+    if (gamerInput.action === "Down" || currentDirection === 0)  
     {
         aChar.y += speed;
         console.log("Player Went Down");
@@ -236,8 +237,9 @@ function draw() {
         }
     }     
 
-    function clickableDpadReleased() {
+function clickableDpadReleased() {
     console.log("dpad released"); // REPORT TO THE CONSOLE
+    currentDirection = -1; // NO DIRECTION
 }
 function clickDpadYellow(){ // ORIGINALLY YELLOW BUT NOW ALL BUTTONS ARE BLUE
     console.log("dpad yellow pressed");
@@ -323,7 +325,12 @@ function animate() {
     else{
         currentLoopIndex = 0;
     }
+    if (currentDirection === -1){
+        drawFrame(aChar.spritesheet, walkLoop[currentLoopIndex], 0, aChar.x, aChar.y);
+    }
+    else {
     drawFrame(aChar.spritesheet, walkLoop[currentLoopIndex], currentDirection, aChar.x, aChar.y);
+    }
 }
 
 function step() {
